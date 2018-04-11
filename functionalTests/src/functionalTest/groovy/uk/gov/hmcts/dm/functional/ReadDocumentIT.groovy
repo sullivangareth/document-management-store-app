@@ -5,7 +5,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.test.context.junit4.SpringRunner
 
+import static org.hamcrest.Matchers.contains
+import static org.hamcrest.Matchers.containsString
 import static org.hamcrest.Matchers.equalTo
+import static org.hamcrest.Matchers.not
 
 /**
  * Created by pawel on 13/10/2017.
@@ -402,7 +405,7 @@ class ReadDocumentIT extends BaseIT {
         def documentUrl = createDocumentAndGetBinaryUrlAs CITIZEN
 
         givenRequest(CITIZEN)
-            .expect()
+            .expect()git br
             .statusCode(200)
             .when()
             .get(documentUrl)
@@ -412,5 +415,20 @@ class ReadDocumentIT extends BaseIT {
             .statusCode(403)
             .when()
             .get(documentUrl)
+    }
+
+    @Test
+    void "R28 As a citizen if I set forwarded headers then they should be ignored"() {
+        def documentUrl = createDocumentAndGetUrlAs CASE_WORKER
+
+        givenRequest(CASE_WORKER)
+            .header("X-Forwarded-Host", "google.com")
+            .header("X-Forwarded-Proto", "https")
+            .expect().log().all()
+            .statusCode(200)
+            .body("_links.self.href", not(containsString("https://google.com")))
+            .when()
+            .get(documentUrl)
+
     }
 }
