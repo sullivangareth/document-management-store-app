@@ -15,6 +15,7 @@ import uk.gov.hmcts.dm.repository.StoredDocumentRepository;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -39,7 +40,7 @@ public class DocumentContentVersionService {
     private int streamBufferSize = 5000000;
 
     public DocumentContentVersion findOne(UUID id) {
-        return documentContentVersionRepository.findOne(id);
+        return documentContentVersionRepository.findById(id).get();
     }
 
     public void streamDocumentContentVersion(@NotNull DocumentContentVersion documentContentVersion) {
@@ -60,8 +61,8 @@ public class DocumentContentVersionService {
     }
 
     public DocumentContentVersion findMostRecentDocumentContentVersionByStoredDocumentId(UUID id) {
-        StoredDocument storedDocument = storedDocumentRepository.findOne(id);
-        return storedDocument != null ? storedDocument.getMostRecentDocumentContentVersion() : null;
+        Optional<StoredDocument> storedDocument = storedDocumentRepository.findById(id);
+        return storedDocument.map(doc -> doc.getMostRecentDocumentContentVersion()).orElse(null);
     }
 
 }

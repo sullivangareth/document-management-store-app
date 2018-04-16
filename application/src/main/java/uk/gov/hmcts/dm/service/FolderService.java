@@ -20,7 +20,7 @@ public class FolderService {
     private FolderRepository folderRepository;
 
     public Folder findOne(UUID id) {
-        return folderRepository.findOne(id);
+        return folderRepository.findById(id).get();
     }
 
     public StoredDocument findOneItem(UUID id, Integer index) {

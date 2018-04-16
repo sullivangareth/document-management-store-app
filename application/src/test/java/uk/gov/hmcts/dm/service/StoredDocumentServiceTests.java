@@ -26,10 +26,7 @@ import uk.gov.hmcts.dm.repository.StoredDocumentRepository;
 import uk.gov.hmcts.dm.security.Classifications;
 
 import java.sql.Blob;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -77,14 +74,14 @@ public class StoredDocumentServiceTests {
 
     @Test
     public void testFindOne() {
-        when(this.storedDocumentRepository.findOne(TestUtil.RANDOM_UUID)).thenReturn(TestUtil.STORED_DOCUMENT);
+        when(this.storedDocumentRepository.findById(TestUtil.RANDOM_UUID)).thenReturn(Optional.of(TestUtil.STORED_DOCUMENT));
         StoredDocument storedDocument = storedDocumentService.findOne(TestUtil.RANDOM_UUID);
         assertThat(storedDocument, equalTo(TestUtil.STORED_DOCUMENT));
     }
 
     @Test
     public void testFindOneThatDoesNotExist() {
-        when(this.storedDocumentRepository.findOne(TestUtil.RANDOM_UUID)).thenReturn(null);
+        when(this.storedDocumentRepository.findById(TestUtil.RANDOM_UUID)).thenReturn(Optional.empty());
         StoredDocument storedDocument = storedDocumentService.findOne(TestUtil.RANDOM_UUID);
         assertThat(storedDocument, equalTo(null));
     }

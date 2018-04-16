@@ -18,6 +18,7 @@ import uk.gov.hmcts.dm.repository.StoredDocumentRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -47,7 +48,7 @@ public class StoredDocumentService {
     private SecurityUtilService securityUtilService;
 
     public StoredDocument findOne(UUID id) {
-        return storedDocumentRepository.findOne(id);
+        return storedDocumentRepository.findById(id).get();
     }
 
     public void save(StoredDocument storedDocument) {
