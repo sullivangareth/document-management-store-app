@@ -2,7 +2,7 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'pmd'
-//    id 'io.spring.dependency-management' version '1.0.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.4.RELEASE'
     id 'org.springframework.boot' version '2.0.1.RELEASE'
     id 'org.owasp.dependencycheck' version '3.1.2'
     id 'com.github.ben-manes.versions' version '0.17.0'
@@ -105,7 +105,6 @@ def versions = [
     liquibase          : '3.5.3',
     mavenFailsafePlugin: '2.19.1',
     postgresql         : '42.2.1',
-    powermock          : '1.7.4',
     sonar              : '3.2',
     springBoot         : springBootVersion,
     springCloud        : 'Finchley.M9',
@@ -174,9 +173,7 @@ dependencies {
     testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '4.2.3.RELEASE'
 
     testCompile group: 'com.h2database', name: 'h2', version: '1.0.60'
-    testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: versions.powermock
-    testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: versions.powermock
-
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.16.0'
     testCompile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.4.7.v20170914'
     testCompile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.4.7.v20170914'
     testCompile group: 'org.eclipse.jetty', name: 'jetty-servlets', version: '9.4.7.v20170914'
