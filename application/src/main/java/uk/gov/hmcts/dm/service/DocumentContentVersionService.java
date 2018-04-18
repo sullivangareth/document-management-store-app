@@ -40,7 +40,7 @@ public class DocumentContentVersionService {
     private int streamBufferSize = 5000000;
 
     public DocumentContentVersion findOne(UUID id) {
-        return documentContentVersionRepository.findById(id).get();
+        return documentContentVersionRepository.findById(id).orElse(null);
     }
 
     public void streamDocumentContentVersion(@NotNull DocumentContentVersion documentContentVersion) {

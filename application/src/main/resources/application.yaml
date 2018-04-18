@@ -104,11 +104,14 @@ health:
 
 endpoints:
   health:
-    sensitive: ${ENDPOINTS_HEALTH_SENSITIVE:false}
+    path: /health
   info:
     sensitive: ${ENDPOINTS_INFO_SENSITIVE:false}
 
 management:
+  endpoints:
+    web:
+      base-path: '/'
   security:
     enabled: ${MANAGEMENT_SECURITY_ENABLED:false}
   diskspace:

@@ -48,7 +48,7 @@ public class StoredDocumentService {
     private SecurityUtilService securityUtilService;
 
     public StoredDocument findOne(UUID id) {
-        return storedDocumentRepository.findById(id).get();
+        return storedDocumentRepository.findById(id).orElse(null);
     }
 
     public void save(StoredDocument storedDocument) {
