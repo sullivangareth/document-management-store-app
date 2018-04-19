@@ -104,7 +104,7 @@ def versions = [
     lombok             : '1.16.18',
     liquibase          : '3.5.3',
     mavenFailsafePlugin: '2.19.1',
-    postgresql         : '42.2.1',
+    postgresql         : '42.2.2',
     sonar              : '3.2',
     springBoot         : springBootVersion,
     springCloud        : 'Finchley.M9',
@@ -171,7 +171,7 @@ dependencies {
     testCompile group: 'net.javacrumbs.json-unit', name: 'json-unit-fluent', version: '1.21.0'
     testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '4.2.3.RELEASE'
 
-    testCompile group: 'com.h2database', name: 'h2', version: '1.0.60'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.16.0'
     testCompile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.4.7.v20170914'
     testCompile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.4.7.v20170914'
