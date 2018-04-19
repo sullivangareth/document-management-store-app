@@ -10,6 +10,7 @@ services:
   dm-store:
     ports:
      - 4603:8080
+#     - 5005:5005
 
   dm-store-db:
     ports:

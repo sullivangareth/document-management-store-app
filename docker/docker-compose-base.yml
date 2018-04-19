@@ -51,10 +51,7 @@ services:
 #      - IDAM_TESTING_SUPPORT_ENABLED=true
 #      - LOGGING_LEVEL_UK_GOV_HMCTS_IDAM=DEBUG
 #      - IDAM_USER_BASE_URI=http://idam-api:8080
-#      - IDAM_S2S_BASE_URI=http://service-auth-provider-api:8080
-#      - http_proxy=
-#      - https_proxy=
-#      - no_proxy=
+#      - IDAM_S2S_BASE_URI=http://service-auth-provider-app:8489
 ##      logging env vars
 #      - ROOT_APPENDER=JSON_CONSOLE
 #      - JSON_CONSOLE_PRETTY_PRINT=false

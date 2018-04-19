@@ -48,7 +48,6 @@ def version
 
 node {
     try {
-
         stage('Checkout') {
             deleteDir()
             checkout scm
@@ -232,4 +231,3 @@ node {
         throw e
     }
 }
-
