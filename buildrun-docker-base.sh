@@ -2,7 +2,7 @@
 
 clear;
 ./bin/fakeversion.sh
-./gradlew installDist bootRepackage
+./gradlew installDist bootJar
 
 docker-compose -f ./docker/compose/docker-compose-em.yml \
 -f ./docker/compose/docker-compose-em-ports.yml \

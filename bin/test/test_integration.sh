@@ -4,7 +4,7 @@ IDAM_API_URL=http://localhost:4501
 S2S_URL=http://localhost:4502
 TEST_URL=http://localhost:4603
 
-./gradlew installDist bootRepackage
+./gradlew installDist bootJar
 
 docker-compose -f ./docker/compose/docker-compose-dm.yml \
 -f ./docker/compose/docker-compose-dm-ports.yml \

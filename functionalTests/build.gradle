@@ -12,8 +12,6 @@ repositories {
     jcenter()
 }
 
-bootRepackage.enabled = false
-
 def springBootVersion = plugins.getPlugin('org.springframework.boot').class.package.implementationVersion
 
 def versions = [

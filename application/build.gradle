@@ -232,7 +232,7 @@ sonarqube {
 }
 
 //(./gradlew clean jar) build/libs/em-api-*-all.jar
-//(./gradlew installDist bootRepackage) build/install/dm-store/bin/dm-store
+//(./gradlew installDist bootJar) build/install/dm-store/bin/dm-store
 jar {
     baseName 'dm-store'
     archiveName = "$baseName"+".jar"
@@ -242,8 +242,8 @@ jar {
     }
 }
 
-bootRepackage {
-    mainClass = 'uk.gov.hmcts.dm.DmApp'
+bootJar {
+    mainClassName = 'uk.gov.hmcts.dm.DmApp'
 }
 
 //This is used in get the version for fakeversion and buildInfo  (./gradlew -q printVersion)

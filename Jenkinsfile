@@ -165,7 +165,7 @@ node {
         stage('Package (JAR)') {
             versioner.addJavaVersionInfo()
             sh "cp -r src/main/resources/ application/src/main/resources/"
-            sh "./gradlew installDist bootRepackage"
+            sh "./gradlew installDist bootJar"
         }
 
         if ("master" == "${env.BRANCH_NAME}") {
