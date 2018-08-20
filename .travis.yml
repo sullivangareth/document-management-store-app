@@ -3,6 +3,13 @@ language: java
 services:
   - docker
 
+env:
+  global:
+    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+    # via the "travis encrypt" command using the project repo's public key
+    # encypted for db/$project
+    - secure: "OkxYzZFNWv3LY7UxkKC6ll6F3SxA2ma1Sf8cN8/dcIDZCGXPgbxVsSLYqVWaxkSfswiKtA035RGqyugOMND1iBg+5nmoubJMykfKyBzEVmUgBPwZznCAE9F472u0nV9r4YCXyvI4rrHDUDCNMi1GFrSfi4GL9R2aCdjLEDOHDl/oaRT9uNtk2h+941bt3RRtgih8lwS8P0Ug9FuRCEYyhQY1OjtYPnJ4tuODr8cN1qp8cimXVwqSnPRkMg+a7sa/h32dFQ9g9k5IWiSA83fol4ajZ6+b9q+LxtmujlMZqx3FEzSASqwZl6zWuXs4qBnsnhdTPeU2vvGHVTJW/fmhI/dtb5xRuNsM2KSxl6gy7cavj3i/GWFI8hWkea5nhTMK6ehBOJS52PsGM/bP2uCKHE5BAOvg/KFHILLIrxBmkxnfGQ5ZjWctcFKVYTR4fNkawlCI7f94bnm4l+g+qkLjHOGgs8RMhgKLChn3GyIC/fPJFT1ZUuUICnBIa9iIz/iDlMUBWRj/2wK02hX9OY4Mvroi8ABBHGU3HCdn++pUhKBaQMvRtTlN7AldCuFuNUR+RL5LD5c0qTV+9a+VfVdg2BQ8SCD3enOIt2tY394p0U3jWAIHpS0pzxfeOqXztpqMgWFbvVnzYHYc+64q9IOf1vxeJpqo189nmSZcnTn3yLo="
+
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
