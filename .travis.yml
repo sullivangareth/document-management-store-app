@@ -15,8 +15,14 @@ cache:
 before_install:
   - sudo apt-get install jq
   - curl https://raw.githubusercontent.com/hmcts/reform-api-docs/master/bin/publish-swagger-docs.sh > publish-swagger-docs.sh
+  - echo -n | openssl s_client -connect scan.coverity.com:443 2>./openssl-connect.stderr | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-certificates.crt
 
 script:
+  - if [[ ${COVERITY_SCAN_BRANCH} == 1 ]];
+    then
+        echo "Don't build on coverty_scan branch.";
+        exit 0;
+    fi
   - ./gradlew check
   - ./gradlew jacocoTestReport
 
@@ -24,3 +30,12 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
   - ./gradlew installDist bootRepackage
   - test "$TRAVIS_BRANCH" = "master" && test "$TRAVIS_PULL_REQUEST" = "false" && sh ./publish-swagger-docs.sh
+
+addons:
+  coverity_scan:
+    project:
+      name: "dwaynebailey/document-management-store-app"
+      description: "Document Store"
+    notification_email: Dwayne.Bailey@HMCTS.net
+    build_command: ./gradlew build
+    branch_pattern: coverity_scan
