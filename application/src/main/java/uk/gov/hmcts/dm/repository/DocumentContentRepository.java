@@ -12,6 +12,4 @@ import java.util.UUID;
 
 @Repository
 public interface DocumentContentRepository extends PagingAndSortingRepository<DocumentContent, UUID> {
-
-
 }

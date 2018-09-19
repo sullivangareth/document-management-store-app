@@ -7,9 +7,9 @@ import org.springframework.data.repository.support.Repositories;
 import org.springframework.stereotype.Component;
 import uk.gov.hmcts.dm.exception.RepositoryCouldNotBeFoundException;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Iterator;
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by pawel on 02/10/2017.
@@ -24,7 +24,8 @@ public class RepositoryFinder {
         try {
             return this.find(Class.forName(domainClassName));
         } catch (ClassNotFoundException e) {
-            throw new RepositoryCouldNotBeFoundException("Could not find a Repository for Domain class: " + domainClassName);
+            throw new RepositoryCouldNotBeFoundException("Could not find a Repository for Domain class: " +
+                                                             domainClassName, e);
         }
     }
 
