@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import uk.gov.hmcts.dm.hateos.DocumentContentVersionHalResource;
 import uk.gov.hmcts.dm.service.BatchMigrateProgressReport;
 import uk.gov.hmcts.dm.service.BlobStorageMigrationService;
@@ -39,12 +40,12 @@ public class BlobStorageMigrationController {
         return ResponseEntity.ok(blobStorageMigrationService.getMigrateProgressReport());
     }
 
-    @GetMapping(value = "/migrate/token")
+    @PostMapping(value = "/migrate/token")
     @ApiOperation("Gets a token for a migration job")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Auth token for a migration job",
         response = String.class)})
-    public ResponseEntity<String> getMigrateAuthToken() {
-        return ResponseEntity.ok(blobStorageMigrationService.getAuthToken());
+    public ResponseEntity<String> getMigrateAuthToken(@RequestParam("public_key") MultipartFile publicKey) {
+        return ResponseEntity.ok(blobStorageMigrationService.getAuthToken(publicKey));
     }
 
     @PostMapping(value = "/migrate")

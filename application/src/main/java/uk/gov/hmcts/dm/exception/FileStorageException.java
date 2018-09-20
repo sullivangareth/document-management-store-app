@@ -24,8 +24,8 @@ public class FileStorageException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        return String.format("Could not store the blob in Azure Blob Store for documentId=[%s] and versionId=[%s]",
-            getDocumentId(), getVersionId());
+        return String.format("Could not store the blob in Azure Blob Store for documentId=[%s] and versionId=[%s] [%s]",
+            getDocumentId(), getVersionId(), getCause());
     }
 
 }
