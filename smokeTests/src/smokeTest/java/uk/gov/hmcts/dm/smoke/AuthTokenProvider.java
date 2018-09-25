@@ -14,20 +14,14 @@ public class AuthTokenProvider {
 
     @Autowired
     public AuthTokenProvider(@Value("${base-urls.idam-s2s}") String idamS2SBaseUri,
-                             @Value("${login.token}")String token
-    ) {
+                             @Value("${login.token}")String token) {
         this.idamS2SBaseUri = idamS2SBaseUri;
-
         this.token = token;
-        System.out.println("IDAM S2S URL - " + idamS2SBaseUri);
-        System.out.println("JWT token - " + token);
     }
 
     public AuthTokens getTokens() {
         return new AuthTokens(token, "");
     }
-
-
 
     public class AuthTokens {
         private final String userToken;
@@ -58,9 +52,4 @@ public class AuthTokenProvider {
             .post("testing-support/lease")
             .andReturn().asString();
     }
-
-
-
-
-
 }

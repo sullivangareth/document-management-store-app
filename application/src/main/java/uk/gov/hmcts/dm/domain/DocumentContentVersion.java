@@ -25,7 +25,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -91,11 +90,6 @@ public class DocumentContentVersion implements RolesAware {
 
     @Getter
     @Setter
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentContentVersion")
-    private Set<DocumentContentVersionAuditEntry> auditEntries;
-
-    @Getter
-    @Setter
     private Long size;
 
     @Getter
@@ -134,7 +128,6 @@ public class DocumentContentVersion implements RolesAware {
                                   Date createdOn,
                                   DocumentContent documentContent,
                                   StoredDocument storedDocument,
-                                  Set<DocumentContentVersionAuditEntry> auditEntries,
                                   Long size,
                                   String contentUri,
                                   String contentChecksum) {
@@ -146,7 +139,6 @@ public class DocumentContentVersion implements RolesAware {
         setCreatedByService(createdByService);
         this.documentContent = documentContent;
         this.storedDocument = storedDocument;
-        this.auditEntries = auditEntries;
         this.size = size;
         this.contentUri = contentUri;
         this.contentChecksum = contentChecksum;
@@ -165,7 +157,6 @@ public class DocumentContentVersion implements RolesAware {
             this.createdOn = (createdOn == null) ? null : new Date(createdOn.getTime());
             return this;
         }
-
     }
 
     public void setOriginalDocumentName(String originalDocumentName) {

@@ -37,7 +37,9 @@ public class BlobStorageWriteService {
                                              @NotNull DocumentContentVersion documentContentVersion,
                                              @NotNull MultipartFile multiPartFile) {
         writeBinaryStream(storedDocument.getId(), documentContentVersion, multiPartFile);
-        documentContentVersionRepository.update(documentContentVersion.getId(), documentContentVersion.getContentUri());
+        documentContentVersionRepository.update(documentContentVersion.getId(),
+                                                documentContentVersion.getContentUri(),
+                                                documentContentVersion.getContentChecksum());
     }
 
     private void writeBinaryStream(UUID documentId,

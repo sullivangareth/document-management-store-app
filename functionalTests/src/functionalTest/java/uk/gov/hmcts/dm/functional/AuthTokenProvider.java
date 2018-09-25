@@ -34,8 +34,6 @@ public class AuthTokenProvider {
         this.idamS2SBaseUri = idamS2SBaseUri;
         this.idamUserBaseUrl = idamUserBaseUri;
         this.s2sSecret = s2sSecret;
-        System.out.println("IDAM User URL - " + idamUserBaseUri);
-        System.out.println("IDAM S2S URL - " + idamS2SBaseUri);
     }
 
     public AuthTokens getTokens(String email, String password) {

@@ -52,8 +52,8 @@ public class AuditEntryService {
     public StoredDocumentAuditEntry createAndSaveEntry(DocumentContentVersion documentContentVersion,
                                                        AuditActions action) {
         return createAndSaveEntry(documentContentVersion, action,
-            securityUtilService.getUserId(), securityUtilService.getCurrentlyAuthenticatedServiceName()
-        );
+                                  securityUtilService.getUserId(), securityUtilService.getCurrentlyAuthenticatedServiceName()
+                                 );
     }
 
     public DocumentContentVersionAuditEntry createAndSaveEntry(DocumentContentVersion documentContentVersion,

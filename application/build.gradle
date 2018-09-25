@@ -185,6 +185,10 @@ dependencies {
     testCompile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: versions.jetty
     testCompile group: 'org.eclipse.jetty', name: 'jetty-servlets', version: versions.jetty
     testCompile group: 'pl.pragmatists', name: 'JUnitParams', version: versions.JUnitParams
+
+    // For batch migration use only
+    compile group: 'org.apache.jclouds', name: 'jclouds-compute', version: '2.+'
+    // They can be removed alongside with migration code
 }
 
 def coverageExclusionList = [

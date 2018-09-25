@@ -22,6 +22,7 @@ import uk.gov.hmcts.dm.exception.DocumentContentVersionNotFoundException;
 import uk.gov.hmcts.dm.exception.DocumentNotFoundException;
 import uk.gov.hmcts.dm.exception.FileStorageException;
 import uk.gov.hmcts.dm.repository.DocumentContentVersionRepository;
+import uk.gov.hmcts.dm.repository.MigrateEntryRepository;
 
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
@@ -58,6 +59,8 @@ public class BlobStorageMigrationServiceTest {
     private StoredDocumentService storedDocumentService;
     @Mock
     private DocumentContentVersionRepository documentContentVersionRepository;
+    @Mock
+    private MigrateEntryRepository auditEntryRepository;
 
     private Blob data;
 
@@ -75,9 +78,10 @@ public class BlobStorageMigrationServiceTest {
     public void setUp() throws Exception {
         cloudBlobContainer = PowerMockito.mock(CloudBlobContainer.class);
         underTest = new BlobStorageMigrationService(cloudBlobContainer,
-                                                    auditEntryService,
                                                     documentContentVersionRepository,
-                                                    storedDocumentService);
+                                                    storedDocumentService,
+                                                    auditEntryRepository,
+                                                    new RsaPublicKeyReader());
         documentContentVersionUuid = UUID.randomUUID();
         documentUuid = UUID.randomUUID();
         data = new SerialBlob(DOC_CONTENT.getBytes());
@@ -96,7 +100,7 @@ public class BlobStorageMigrationServiceTest {
 
         underTest.migrateDocumentContentVersion(documentUuid, documentContentVersionUuid);
 
-        verify(documentContentVersionRepository).update(dcv.getId(), azureProvidedUri);
+        verify(documentContentVersionRepository).update(dcv.getId(), azureProvidedUri, "");
         verify(auditEntryService).createAndSaveEntry(dcv, UPDATED);
         verify(cloudBlockBlob).upload(argThat(new InputStreamMatcher(DOC_CONTENT)), eq(dcv.getSize()));
         assertThat(dcv.getContentUri(), is(azureProvidedUri));
