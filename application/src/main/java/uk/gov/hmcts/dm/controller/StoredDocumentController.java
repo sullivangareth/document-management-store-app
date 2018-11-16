@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -74,6 +75,10 @@ public class StoredDocumentController {
         if (result.hasErrors()) {
             throw new MethodArgumentNotValidException(uploadDocumentsCommandMethodParameter, result);
         } else {
+            System.out.println("filename: " + uploadDocumentsCommand.getFiles().get(0).getOriginalFilename());
+            if (uploadDocumentsCommand.getFiles().get(0).getOriginalFilename().matches(".*fail.*")) {
+                throw new DataIntegrityViolationException("Failed!");
+            }
             List<StoredDocument> storedDocuments =
                     auditedStoredDocumentOperationsService.createStoredDocuments(uploadDocumentsCommand);
             return ResponseEntity
