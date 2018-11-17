@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 import org.springframework.web.context.request.RequestAttributes;
+import uk.gov.hmcts.dm.config.logging.AppInsights;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,9 @@ public class ApiErrorAttributes extends DefaultErrorAttributes {
 
     @Value("${errors.globalIncludeStackTrace}")
     private boolean globalIncludeStackTrace = true;
+
+    @Autowired
+    private AppInsights appInsights;
 
     @Autowired
     private ExceptionStatusCodeAndMessageResolver exceptionStatusCodeAndMessageResolver;
@@ -45,6 +49,9 @@ public class ApiErrorAttributes extends DefaultErrorAttributes {
         requestAttributes.setAttribute("javax.servlet.error.status_code", errorStatusCodeAndMessage.getStatusCode(), 0);
         errorAttributes.put("status", errorStatusCodeAndMessage.getStatusCode());
         if (throwable != null) {
+            if (throwable instanceof Exception) {
+                appInsights.trackException((Exception) throwable);
+            }
             log.error(throwable.getMessage(), throwable);
         }
 
