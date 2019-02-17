@@ -6,7 +6,7 @@ properties([
     parameters([
         booleanParam(
             name: 'RUN_MUTATION',
-            defaultValue: true,
+            defaultValue: false,
             description: 'Run pitest mutation tests (duration approx. 1 hour)'
         )
     ]),
