@@ -18,6 +18,7 @@ It uses:
 * Gradle
 * [lombok project](https://projectlombok.org/) - Lombok project
 
+
 ### Plugins
 * [lombok plugin](https://plugins.jetbrains.com/idea/plugin/6317-lombok-plugin) - Lombok IDEA plugin
 
