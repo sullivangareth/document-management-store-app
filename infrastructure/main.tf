@@ -122,6 +122,7 @@ module "app" {
     STORAGE_CONTAINER_DOCUMENT_CONTAINER_NAME = "${azurerm_storage_container.document_container.name}"
 
     TEMP_FORCE_REDEPLOY = "1"
+    DUMMY_VAR = "TRUE"
   }
 }
 
