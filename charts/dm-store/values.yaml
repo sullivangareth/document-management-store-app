@@ -5,7 +5,7 @@ java:
     nameOverride: dm-store-db
     service:
       port: 5432
-  image: 'https://hmctspublic.azurecr.io/dm/store:latest'
+  image: 'hmctspublic.azurecr.io/dm/store:latest'
   applicationPort: '4603'
   livenessPath: '/health'
   keyVaults:
@@ -53,8 +53,6 @@ java:
     LOG_LEVEL_DM: INFO
     SHOW_SQL: 'false'
     JSON_CONSOLE_PRETTY_PRINT: 'false'
-    ROOT_APPENDER: JSON_CONSOLE
-
 
     ENDPOINTS_HEALTH_SENSITIVE: 'true'
     ENDPOINTS_INFO_SENSITIVE: 'true'
