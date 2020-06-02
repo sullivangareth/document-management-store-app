@@ -17,6 +17,7 @@ import uk.gov.hmcts.dm.hateos.StoredDocumentAuditEntryHalResource;
 import uk.gov.hmcts.dm.repository.StoredDocumentRepository;
 import uk.gov.hmcts.dm.service.AuditEntryService;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -40,12 +41,12 @@ public class StoredDocumentAuditController {
         return storedDocumentRepository
             .findById(documentId)
             .map(storedDocument -> ResponseEntity.ok()
-                .contentType(V1MediaType.V1_HAL_AUDIT_ENTRY_COLLECTION_MEDIA_TYPE).body(new CollectionModel<>(
+                .contentType(V1MediaType.V1_HAL_AUDIT_ENTRY_COLLECTION_MEDIA_TYPE).body(CollectionModel.of(new ArrayList<StoredDocumentAuditEntryHalResource>(
                     auditEntryService
                         .findStoredDocumentAudits(storedDocument)
                         .stream()
                         .map(StoredDocumentAuditEntryHalResource::new)
-                        .collect(Collectors.toList()))))
+                        .collect(Collectors.toList())))))
             .orElseThrow(() -> new StoredDocumentNotFoundException(documentId));
     }
 
