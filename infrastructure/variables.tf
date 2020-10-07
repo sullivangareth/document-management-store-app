@@ -1,6 +1,4 @@
-variable "product" {
-  type = "string"
-}
+variable "product" {}
 
 variable "raw_product" {
   default = "dm" // jenkins-library overrides product for PRs and adds e.g. pr-118-dm
@@ -10,9 +8,7 @@ variable "shared_product" {
   default = "ccd"
 }
 
-variable "component" {
-  type = "string"
-}
+variable "component" {}
 
 variable "team_name" {
   default = "evidence"
@@ -23,26 +19,22 @@ variable "app_language" {
 }
 
 variable "location" {
-  type    = "string"
   default = "UK South"
 }
 
-variable "env" {
-  type = "string"
-}
+variable "env" {}
 
-variable "subscription" {
-  type = "string"
-}
+variable "subscription" {}
 
-variable "ilbIp"{}
+variable "ilbIp" {}
 
 variable "tenant_id" {}
 
 variable "jenkins_AAD_objectId" {
-  type                        = "string"
-  description                 = "(Required) The Azure AD object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
+  description = "(Required) The Azure AD object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
 }
+
+variable "deployment_namespace" {}
 
 ////////////////////////////////////////////////
 //Addtional Vars ///////////////////////////////
@@ -82,7 +74,7 @@ variable "database_name" {
 }
 
 variable "database_storage_mb" {
-  default = "51200"
+  default     = "51200"
   description = "'storage_mb' size for the PaaS database (Note: can't be resized currently)"
 }
 
@@ -118,73 +110,60 @@ variable "show_sql" {
 // Toggle Features
 ////////////////////////////////////////////////
 variable "enable_idam_healthcheck" {
-    default = "false"
+  default = "false"
 }
 
 variable "enable_metadata_search" {
-    default = "true"
+  default = "true"
 }
 
 variable "enable_document_and_metadata_upload" {
-    default = "true"
+  default = "true"
 }
 
 variable "enable_folder_api" {
-    default = "true"
+  default = "true"
 }
 
 variable "enable_delete" {
-    default = "true"
+  default = "true"
 }
 
 variable "enable_ttl" {
-    default = "false"
+  default = "false"
 }
 
 variable "enable_thumbnail" {
-    default = "true"
+  default = "true"
 }
 
 variable "enable_testing" {
   default = "true"
 }
 
-////////////////////////////////////////////////
-// Migration Job Specific
-////////////////////////////////////////////////
-variable "blobstore_migrate_ccd_secret" {
-  default = "y2hahvdZ9evcTVq2"
-}
-
-variable "blobstore_migrate_ccd_public_key_required" {
-  default = "false"
-}
-
-variable "blobstore_migrate_ccd_public_key" {
-  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiQ//gc/G53d9dLCtf123fIYo49gUySuJuxOcw2GtieWTMSy+O7RNtsAIjVf3mCOdDNuN69tZNPEWMdaW8n11s9MwYFahtxDecyn0KIP9MvPsfSMSbxhp/f7kfbdB/H/S5eYea66JTyeJS6uNd76RdHttx0mLO30ZkRcXB25c2SIXhRYsdoeKS5GXHDdNejkQM0S/Ev94x2UunApmYHjWN1XcDhsEsAeF4WHnvYh2XiMn9vHY44AqvbWLlAmCgzaXpz8Xhl0fO7jDKSeReDyuM3UTMaiFFaxuvliGol7aIXq/aVe/miiD2SLxHZ6RxAPW80bhXrzJMTLTCqhCEhzfv someone@somewhere.sometime"
+variable "enable_azure_media_service" {
+  default = false
 }
 
 ////////////////////////////////////////////////
 // Addtional
 ////////////////////////////////////////////////
 variable "max_file_size_in_mb" {
-    default = "100"
+  default = "100"
 }
 
 variable "common_tags" {
-  type = "map"
+  type = map(string)
 }
 
 variable "asp_name" {
-  type = "string"
   description = "App Service Plan (ASP) to use for the webapp, 'use_shared' to make use of the shared ASP"
-  default = "use_shared"
+  default     = "use_shared"
 }
 
 variable "asp_rg" {
-  type = "string"
   description = "App Service Plan (ASP) resource group for 'asp_name', 'use_shared' to make use of the shared resource group"
-  default = "use_shared"
+  default     = "use_shared"
 }
 
 variable "managed_identity_object_id" {

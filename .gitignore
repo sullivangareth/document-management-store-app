@@ -58,7 +58,6 @@ hs_err_pid*
 # IntelliJ
 out
 application/out
-performanceTests/out
 functionalTests/out
 
 # mpeltonen/sbt-idea plugin
@@ -100,3 +99,6 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/gradle
 
 application/src/main/resources/META-INF/build-info.properties
+
+# terraform
+.terraform

@@ -7,23 +7,16 @@ services:
         build:
             context: ./docker/database
         image: hmcts/dm-store-db:latest
+        environment:
+            POSTGRES_HOST_AUTH_METHOD: trust
         ports:
             - 5432:5432
 
-    make-container-call:
-        image: byrnedo/alpine-curl
-        command: -XPUT --verbose http://azure-storage-emulator-azurite:10000/devstoreaccount1/hmctstestcontainer?restype=container
-        links:
-            - azure-storage-emulator-azurite
-        depends_on:
-            - azure-storage-emulator-azurite
-
     azure-storage-emulator-azurite:
-        image: arafato/azurite
+        image: mcr.microsoft.com/azure-storage/azurite
         ports:
             - 10000:10000
-        environment:
-            executable: "blob"
+        command: "azurite-blob --blobHost 0.0.0.0 --loose"
         volumes:
             - ccd-docker-azure-blob-data:/opt/azurite/folder
 
