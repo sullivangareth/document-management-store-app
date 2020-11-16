@@ -1,4 +1,5 @@
 #!groovy
+import uk.gov.hmcts.contino.AppPipelineDsl
 
 properties([
     [
@@ -43,10 +44,23 @@ env.S2S_URL = "http://rpe-service-auth-provider-perftest.service.core-compute-pe
 
 withPipeline(type , product, component) {
 
+    env.PACT_BROKER_FULL_URL = 'https://pact-broker.platform.hmcts.net'
+
     enableDbMigration('ccd')
     overrideVaultEnvironments(vaultOverrides)
     loadVaultSecrets(secrets)
     enableSlackNotifications('#em-dev-chat')
+
+    onMaster {
+
+        after('test') {
+            sh '''
+            curl https://raw.githubusercontent.com/hmcts/reform-api-docs/master/bin/publish-swagger-docs.sh > publish-swagger-docs.sh
+            sh ./publish-swagger-docs.sh
+             '''
+        }
+        enablePactAs([AppPipelineDsl.PactRoles.PROVIDER])
+    }
 
     onPR {
         env.ENABLE_METADATA_MIGRATION = true
